@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoundSync — Proposed Redesign</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@200;400;600;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="scrollProgress"></div>
+    <div id="cursorGlow"></div>
+
+    <nav>
+        <div class="logo">
+            <span class="logo-dot"></span>
+            SoundSync
+        </div>
+        <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#feed">Discover</a>
+            <a href="#moods">Moods</a>
+        </div>
+        <button class="nav-cta">Get Early Access</button>
+    </nav>
+
+    <section class="hero">
+        <canvas id="heroCanvas"></canvas>
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="hero-badge-dot"></span>
+                Now in Open Beta
+            </div>
+            <h1>Feel the <span class="gradient-text">Sound</span>, Not Just Hear It</h1>
+            <p class="hero-sub">An audio experience built around how you actually listen — intuitive, social, and deeply personal.</p>
+            <div class="hero-actions">
+                <button class="btn-primary" id="heroPlayBtn">Start Listening Free</button>
+                <button class="btn-ghost">Watch Demo</button>
+            </div>
+        </div>
+        <div class="hero-stats">
+            <div class="stat">
+                <div class="stat-num" data-target="2400">0</div>
+                <div class="stat-label">Artists Onboard</div>
+            </div>
+            <div class="stat">
+                <div class="stat-num" data-target="186">0</div>
+                <div class="stat-label">Hours of Music</div>
+            </div>
+            <div class="stat">
+                <div class="stat-num" data-target="52">0</div>
+                <div class="stat-label">Genres</div>
+            </div>
+        </div>
+        <div class="scroll-hint">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <section class="features-section" id="features">
+        <div class="features-header">
+            <div class="section-label">Why SoundSync</div>
+            <div class="section-title">Built Different</div>
+            <p class="section-desc">Every feature is designed to remove friction between you and the music you love.</p>
+        </div>
+        <div class="features-track" id="featuresTrack">
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-wave-square"></i></div>
+                <h3>Living Waveforms</h3>
+                <p>See your music breathe. Real-time audio visualization that turns every track into a visual journey.</p>
+                <div class="feature-visual">
+                    <div class="mini-wave" id="miniWave1"></div>
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-users"></i></div>
+                <h3>Collaborative Sessions</h3>
+                <p>Listen together in real-time. Invite friends, vote on what plays next, and share the moment.</p>
+                <div class="feature-visual">
+                    <div class="mini-nodes" id="miniNodes"></div>
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-brain"></i></div>
+                <h3>Context-Aware Queue</h3>
+                <p>Our engine learns your patterns — time of day, activity, mood — and queues the perfect next track.</p>
+                <div class="feature-visual">
+                    <div class="mini-eq" id="miniEq"></div>
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-shield-halved"></i></div>
+                <h3>Artist-First Payouts</h3>
+                <p>Transparent per-second streaming payouts. Artists see exactly where every rupee comes from.</p>
+                <div class="feature-visual">
+                    <div class="payout-bar-wrap">
+                        <div class="payout-bar-fill"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="feed-section" id="feed">
+        <div class="feed-top">
+            <div>
+                <div class="section-label">Discover</div>
+                <div class="section-title">Your Feed, Your Sound</div>
+            </div>
+            <div class="feed-tabs" id="feedTabs">
+                <button class="feed-tab active" data-tab="foryou">For You</button>
+                <button class="feed-tab" data-tab="trending">Trending</button>
+                <button class="feed-tab" data-tab="new">New Releases</button>
+                <button class="feed-tab" data-tab="indie">Indie Picks</button>
+            </div>
+        </div>
+        <div class="now-playing" id="nowPlaying">
+            <img class="np-art" id="npArt" src="https://picsum.photos/seed/np-default/112/112.jpg" alt="Now playing">
+            <div class="np-info">
+                <div class="np-title" id="npTitle">Select a track to play</div>
+                <div class="np-artist" id="npArtist">—</div>
+            </div>
+            <div class="np-waveform" id="npWaveform"></div>
+            <div class="np-controls">
+                <button class="np-btn" aria-label="Previous"><i class="fas fa-backward-step"></i></button>
+                <button class="np-play" id="npPlayBtn" aria-label="Play"><i class="fas fa-play"></i></button>
+                <button class="np-btn" aria-label="Next"><i class="fas fa-forward-step"></i></button>
+            </div>
+        </div>
+        <div class="tracks-grid" id="tracksGrid"></div>
+    </section>
+
+    <section class="mood-section" id="moods">
+        <div class="section-label">Explore by Mood</div>
+        <div class="section-title">What Are You Feeling?</div>
+        <p class="section-desc">Tap a mood, get an instant playlist — no searching, no thinking, just vibes.</p>
+        <div class="mood-grid" id="moodGrid"></div>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="logo"><span class="logo-dot"></span>SoundSync</div>
+                <p>Redefining how India listens. Built with love for music and the people who make it.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Product</h4>
+                <a href="#">Features</a>
+                <a href="#">Pricing</a>
+                <a href="#">Mobile App</a>
+                <a href="#">Integrations</a>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <a href="#">About</a>
+                <a href="#">Careers</a>
+                <a href="#">Press Kit</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Licenses</a>
+                <a href="#">Cookie Policy</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>2025 SoundSync. All rights reserved.</p>
+            <div class="footer-socials">
+                <a href="#" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="annotation-bar" id="annoBar">
+        <span>This is a <strong>working redesign prototype</strong> of SoundSync's Landing Page + Feed. Open in Chrome for the full experience.</span>
+        <button class="close-anno" id="closeAnno">Got it</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
